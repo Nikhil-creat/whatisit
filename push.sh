@@ -7,7 +7,7 @@ read -p "GitHub email: " E
 read -p "Repo name [whatisit]: " R; R=${R:-whatisit}
 git config --global user.name "$U"; git config --global user.email "$E"
 [ -d .git ] || git init -q
-git add .; git commit -qm "WhatIsIt v2" || true
+git add .; git commit -qm "WhatIsIt v3" || true
 git branch -M main
 git remote remove origin 2>/dev/null || true
 git remote add origin "https://github.com/$U/$R.git"

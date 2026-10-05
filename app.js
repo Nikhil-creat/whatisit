@@ -84,7 +84,7 @@ $('#mic').onclick=()=>{if(!SR)return toast('Voice not supported here');const r=n
   r.onresult=e=>{const t=e.results[0][0].transcript.toLowerCase();/freeze|stop|resume/.test(t)?freeze():say()};r.onerror=()=>toast('Voice failed');r.start();toast('Say: what is this / freeze')};
 $('#thr').oninput=e=>{thr=e.target.value/100;$('#tv').textContent=e.target.value+'%'};
 document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===b));
-  $('#scan').hidden=b.dataset.t!=='scan';$('#hist').hidden=b.dataset.t!=='hist';if(b.dataset.t==='hist')showHist()});
+  document.querySelectorAll('#sheet>section').forEach(s=>s.hidden=s.id!==b.dataset.t);if(b.dataset.t==='hist')showHist()});
 function showHist(){$('#hl').innerHTML=hist.length?hist.map(h=>`<div class="hi"><span class="sw" style="background:${h.col}"></span>${h.c}<small>${new Date(h.t).toLocaleString()}</small></div>`).join(''):'<p style="color:var(--mute)">No scans yet.</p>'}
 $('#clr').onclick=()=>{hist=[];localStorage.removeItem('wii-hist');showHist()};
 addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e;$('#inst').hidden=false});

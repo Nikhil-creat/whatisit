@@ -8,7 +8,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon.svg">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
-<title>WhatIsIt: AI vision lens v2</title>
+<title>WhatIsIt: AI vision lens v3</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -25,14 +25,29 @@
   <div id="toast" role="status"></div>
 </div>
 <main id="sheet">
-  <nav id="tabs"><button class="tab on" data-t="scan">Scan</button><button class="tab" data-t="hist">History</button></nav>
+  <nav id="tabs"><button class="tab on" data-t="scan">Scan</button><button class="tab" data-t="hist">History</button><button class="tab" data-t="chat">Chat</button><button class="tab" data-t="set">Settings</button></nav>
   <section id="scan">
     <div id="chips"></div>
     <div id="info"></div>
     <label class="rng">Sensitivity <input id="thr" type="range" min="30" max="90" value="50"><output id="tv">50%</output></label>
-    <div id="bar"><button id="freeze">Freeze</button><button id="mic">Voice</button><button id="say" class="p">Read aloud</button><button id="share">Share</button><button id="deep">Deep ID</button><button id="auto">Auto read</button><button id="snap">Snap</button></div>
+    <div id="bar"><button id="freeze">Freeze</button><button id="mic">Voice</button><button id="say" class="p">Read aloud</button><button id="share">Share</button><button id="deep">Deep ID</button><button id="auto">Auto read</button><button id="snap">Snap</button><button id="aiv">AI Vision</button></div>
   </section>
   <section id="hist" hidden><div id="hl"></div><button id="clr" class="wide">Clear history</button></section>
+  <section id="chat" hidden>
+    <div id="qs"></div><div id="msgs" aria-live="polite"></div>
+    <div id="inrow"><input id="cin" placeholder="Ask anything about what you see" autocomplete="off"><button id="cmic" aria-label="Speak">&#127908;</button><button id="csend" class="p">Send</button></div>
+  </section>
+  <section id="set" hidden>
+    <label class="f">AI provider<select id="prov"><option value="groq">Groq (free tier)</option><option value="gemini">Google Gemini (free tier)</option></select></label>
+    <label class="f">API key<input id="key" type="password" placeholder="paste your key" autocomplete="off"></label>
+    <label class="f">Text model<input id="tm" list="ml"></label>
+    <label class="f">Vision model<input id="vm" list="ml"></label><datalist id="ml"></datalist>
+    <label class="f">Reply language<select id="lang"></select></label>
+    <label class="f row"><input id="ctx" type="checkbox"> Tell the AI what the camera detects</label>
+    <label class="f row"><input id="spk" type="checkbox"> Speak AI replies</label>
+    <div id="bar2"><button id="lm">Load models</button><button id="tst" class="p">Test</button><button id="clc">Clear chat</button></div>
+    <p class="src">Your key stays in this browser only. Never paste it into the code or the repo. Free keys: console.groq.com/keys and aistudio.google.com/apikey. AI Vision sends one camera frame to the provider you choose.</p>
+  </section>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgpu@4.22.0/dist/tf-backend-webgpu.min.js" defer></script>
@@ -40,5 +55,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.1/dist/mobilenet.min.js" defer></script>
 <script src="data.js" defer></script>
 <script src="app.js" defer></script>
+<script src="chat.js" defer></script>
 </body>
 </html>
