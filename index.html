@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#05080d">
+<meta name="description" content="WhatIsIt: on-device AI camera that names objects and explains what they are used for.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>WhatIsIt: AI vision lens v2</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="gate">
+  <div class="orb"></div>
+  <h1>WhatIsIt</h1>
+  <p>Point. Detect. Understand. An AI lens that runs fully on your phone.</p>
+  <button id="go" class="big">Start lens</button>
+  <div id="msg" role="status"></div>
+</div>
+<div id="stage">
+  <video id="v" playsinline muted></video><canvas id="c"></canvas>
+  <div id="hud"><span class="pill" id="st">booting</span><span class="pill" id="fps">0 fps</span><span class="sp"></span><button class="ib" id="inst" hidden aria-label="Install app">&#x2B07;</button><button class="ib" id="flip" aria-label="Switch camera">&#x21C4;</button></div>
+  <div id="toast" role="status"></div>
+</div>
+<main id="sheet">
+  <nav id="tabs"><button class="tab on" data-t="scan">Scan</button><button class="tab" data-t="hist">History</button></nav>
+  <section id="scan">
+    <div id="chips"></div>
+    <div id="info"></div>
+    <label class="rng">Sensitivity <input id="thr" type="range" min="30" max="90" value="50"><output id="tv">50%</output></label>
+    <div id="bar"><button id="freeze">Freeze</button><button id="mic">Voice</button><button id="say" class="p">Read aloud</button><button id="share">Share</button><button id="deep">Deep ID</button><button id="auto">Auto read</button><button id="snap">Snap</button></div>
+  </section>
+  <section id="hist" hidden><div id="hl"></div><button id="clr" class="wide">Clear history</button></section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgpu@4.22.0/dist/tf-backend-webgpu.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.3/dist/coco-ssd.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.1/dist/mobilenet.min.js" defer></script>
+<script src="data.js" defer></script>
+<script src="app.js" defer></script>
+</body>
+</html>
